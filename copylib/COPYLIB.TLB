@@ -1,0 +1,6 @@
+# Mini-ROLLS copy library manifest; mirrors the role of the legacy copylib.tlb
+CPM-COMMON.TXT
+CPM-CUSTOMER.TXT
+CPM-ORDER.TXT
+CPM-PAR9001.TXT
+CPM-PRODUCT.TXT

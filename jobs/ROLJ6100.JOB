@@ -1,0 +1,5 @@
+#!/bin/sh
+# Manual/user job: order processing
+set -e
+cd "$(dirname "$0")/.."
+./bin/ROLS6100

@@ -1,0 +1,6 @@
+FORM ROLS0001
+TITLE MINI-ROLLS MAIN MENU
+MENU 1|Order management|ROLS6001
+MENU 2|Customer management|ROLS6010
+MENU 3|Product management|ROLS6020
+MENU X|Exit|EXIT

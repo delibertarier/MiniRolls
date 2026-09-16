@@ -1,0 +1,4 @@
+000100 01  CUSTOMER-REC.
+000200 05  CUS-ID              PIC 9(6).
+000300 05  CUS-NAME            PIC X(30).
+000400 05  CUS-STATUS          PIC X(10).

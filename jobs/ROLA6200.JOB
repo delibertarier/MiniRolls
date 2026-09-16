@@ -1,0 +1,5 @@
+#!/bin/sh
+# Automatic job: stock update
+set -e
+cd "$(dirname "$0")/.."
+./bin/ROLS6200

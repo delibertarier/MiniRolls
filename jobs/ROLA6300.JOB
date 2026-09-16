@@ -1,0 +1,5 @@
+#!/bin/sh
+# Automatic job: daily report
+set -e
+cd "$(dirname "$0")/.."
+./bin/ROLS6300

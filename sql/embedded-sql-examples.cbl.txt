@@ -1,0 +1,19 @@
+      * Analysis fixture: representative embedded SQL for graph extraction.
+       EXEC SQL
+          SELECT STATUS, CUSTOMER_ID
+            INTO :ORD-STATUS, :ORD-CUSTOMER-ID
+            FROM ORDERS
+           WHERE ORDER_ID = :ORD-ID
+       END-EXEC.
+
+       EXEC SQL
+          UPDATE ORDERS
+             SET STATUS = 'CANCELLED'
+           WHERE ORDER_ID = :ORD-ID
+       END-EXEC.
+
+       EXEC SQL
+          INSERT INTO ORDER_HISTORY
+                 (ORDER_ID, EVENT_TYPE, EVENT_TS)
+          VALUES (:ORD-ID, 'CANCELLED', CURRENT_TIMESTAMP)
+       END-EXEC.

@@ -1,2 +1,4 @@
 # Compiled COBOL programs
 bin/
+__pycache__/
+*.pyc

@@ -23,8 +23,13 @@ the supplied ROLLS development material.
 or other legacy discovery tools.
 
 It contains a small Python-standard-library Formgen emulator. It reads `.LAY`
-files, renders a complete terminal form, collects the fields, and invokes a
-small compiled harness around the corresponding COBOL program.
+files and draws a boxed terminal form. The cursor sits inside `[ ]`; typing
+edits that field in place; Tab/Enter moves to the next field; values stay
+visible until SAVE or CANCEL. Create forms assign the next ID automatically.
+On Create Order, Enter on Customer or Product opens a list so the operator can
+pick a name instead of typing an identifier. SAVE invokes a small compiled
+harness around the corresponding COBOL program. The COBOL corpus itself remains
+ACCEPT-based and has no `SCREEN SECTION`.
 
 The COBOL business programs remain strict:
 

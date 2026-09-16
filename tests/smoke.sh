@@ -20,7 +20,7 @@ grep -q "daily report" /tmp/mini-rolls-batch3.txt
 ./tests/source-audit.sh
 ./tests/dialect.sh
 echo "PASS: Mini-ROLLS v9 compile, native persistence seed and batch tests"
-echo "NOTE: SCREEN SECTION flows are interactive and should be checked with ./run.sh"
+echo "NOTE: TUI form flows are interactive and should be checked with ./run.sh"
 
 if grep -R "SCREEN SECTION" cobol/*.COB >/dev/null 2>&1; then
   echo "FAIL: SCREEN SECTION leaked into legacy corpus"
@@ -33,4 +33,6 @@ test -x bin/ui-ROLS6021
 test -x bin/ui-ROLS6013
 test -x bin/ui-ROLS6023
 ./tests/form-config.sh
+./tests/tui-form.sh
+./tests/auto-id.sh
 echo "PASS: v8 legacy/runtime separation checks"

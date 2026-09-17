@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")/.."
+ROLLS_ROOT="$(pwd)"
+. ./local-runtime/logicals.sh
 
 out=$(printf 'CONTOSO\n' | ./bin/ui-ROLS6011)
 echo "$out" | grep -q "OK CUSTOMER STORED ID 000003"

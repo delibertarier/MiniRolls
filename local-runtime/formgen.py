@@ -7,6 +7,7 @@ the next field, and values stay visible on the form until SAVE or CANCEL.
 """
 from pathlib import Path
 import curses
+import os
 import subprocess
 import sys
 
@@ -20,6 +21,26 @@ CUS_REC = 46
 PRD_REC = 52
 LOOKUP_WIDTH = 32
 
+# OpenVMS-style logical names. Production ROLLS uses HP COBOL ASSIGN TO
+# logicals on the SIROL cluster. Local GnuCOBOL -std=cobol85 maps the same
+# implementor-names to environment variables (no HP COBOL / OpenVMS license).
+LOGICALS = {
+    "ORDERS": str(ROOT / "data" / "orders.dat"),
+    "CUSTOMERS": str(ROOT / "data" / "customers.dat"),
+    "PRODUCTS": str(ROOT / "data" / "products.dat"),
+    "HISTORY": str(ROOT / "data" / "order_history.dat"),
+}
+
+
+def apply_logicals(env=None):
+    target = os.environ if env is None else env
+    for name, path in LOGICALS.items():
+        target.setdefault(name, path)
+    return target
+
+
+apply_logicals()
+
 
 def _chunks(path, size):
     if not path.exists():
@@ -31,7 +52,7 @@ def _chunks(path, size):
 
 def load_customers():
     items = []
-    for rec in _chunks(ROOT / "data" / "customers.dat", CUS_REC):
+    for rec in _chunks(Path(os.environ.get("CUSTOMERS", LOGICALS["CUSTOMERS"])), CUS_REC):
         items.append(
             {
                 "id": rec[0:6].decode("ascii"),
@@ -44,7 +65,7 @@ def load_customers():
 
 def load_products():
     items = []
-    for rec in _chunks(ROOT / "data" / "products.dat", PRD_REC):
+    for rec in _chunks(Path(os.environ.get("PRODUCTS", LOGICALS["PRODUCTS"])), PRD_REC):
         cents = int(rec[36:45].decode("ascii") or "0")
         items.append(
             {
@@ -410,8 +431,9 @@ def execute(name, values=None):
     if not exe.exists():
         raise SystemExit(f"Missing executable: {exe}")
     data = "" if values is None else "\n".join(values) + "\n"
+    env = apply_logicals(os.environ.copy())
     result = subprocess.run(
-        [str(exe)], input=data, text=True, cwd=ROOT, capture_output=True
+        [str(exe)], input=data, text=True, cwd=ROOT, capture_output=True, env=env
     )
     return result
 

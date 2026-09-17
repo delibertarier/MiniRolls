@@ -73,7 +73,7 @@ db:
 seed: build
 	@rm -f data/orders.dat data/customers.dat data/products.dat data/order_history.dat
 	@touch data/order_history.dat
-	./bin/ROLS7999
+	@ROLLS_ROOT="$(CURDIR)" . ./local-runtime/logicals.sh && ./bin/ROLS7999
 	@echo "Native COBOL sequential seed files created"
 
 test: seed

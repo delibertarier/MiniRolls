@@ -1,5 +1,9 @@
 #!/bin/sh
-# Automatic job: stock update
+# Automatic job ROLA6200 — stock update
+# OpenVMS analog: $ SET DEFAULT ROLLS$DATA  /  $ RUN ROLS6200
 set -e
 cd "$(dirname "$0")/.."
+ROLLS_ROOT="$(pwd)"
+# shellcheck source=../local-runtime/logicals.sh
+. ./local-runtime/logicals.sh
 ./bin/ROLS6200

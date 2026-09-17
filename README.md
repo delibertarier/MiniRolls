@@ -17,6 +17,36 @@ There is deliberately **no `SCREEN SECTION`** in the COBOL corpus. Screen
 definitions live in `.LAY` artifacts, reflecting the architecture described in
 the supplied ROLLS development material.
 
+## Production architecture vs local stand-in
+
+Full ROLLS on the SIROL OpenVMS Integrity cluster uses HP COBOL II/XL
+(ANSI COBOL 85, with 1974 compatibility), Formgen screens, Oracle SQL, and
+DCL jobs. Mini-ROLLS mirrors that shape so discovery still sees ROLSnnnn
+programs, copy members, .LAY forms, jobs and Oracle SQL — without HP COBOL,
+VSI OpenVMS, commercial Formgen or Oracle licenses, and while remaining
+runnable on an Apple Silicon Mac.
+
+| Production ROLLS | Mini-ROLLS local (M1) |
+| --- | --- |
+| HP COBOL II/XL, ANSI 85 | GnuCOBOL `-fixed -std=cobol85` (Homebrew, no license) |
+| OpenVMS RMS + DCL logicals (`ASSIGN TO ORDERS`) | Same ASSIGN names; GnuCOBOL EXTERNAL maps them to env vars |
+| Formgen (.LAY, no SCREEN SECTION) | Same .LAY corpus; `local-runtime/formgen.py` emulator |
+| Oracle + embedded SQL | SQL fixtures in `sql/` only; not compiled (no Pro*COBOL/Oracle) |
+| Sequential/SQL data on SIROL | Sequential files under `data/` via logicals `ORDERS`, `CUSTOMERS`, `PRODUCTS`, `HISTORY` |
+| User job ROLJ / automatic ROLA | Same names; POSIX `sh` with DCL analog comments |
+| Copy library `.TLB` | `copylib/COPYLIB.TLB` manifest + `COPY ... TXT` |
+
+Do **not** compile `EXEC SQL` into the macOS binaries. Do **not** add
+`SCREEN SECTION`. Those would either demand licenses we cannot use, or
+diverge from the Formgen architecture.
+
+A full mapping (production SIROL versus this subset, including what is
+intentionally not cloned) is in [ROLLS-ALIGNMENT.md](ROLLS-ALIGNMENT.md).
+
+The functional and technical analysis (what this version delivers, what is
+explicitly not present yet, and the technical design) is in
+[ANALYSE.md](ANALYSE.md).
+
 ## Local-only runtime
 
 `local-runtime/` is a development harness and must NOT be supplied to Graphify
@@ -73,6 +103,8 @@ local-runtime/
 tests/ground-truth.md
 bin/
 data/
+ANALYSE.md
+ROLLS-ALIGNMENT.md
 ```
 
 `tests/ground-truth.md` is evaluation truth, never model input.

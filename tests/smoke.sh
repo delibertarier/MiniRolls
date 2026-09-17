@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")/.."
+ROLLS_ROOT="$(pwd)"
+. ./local-runtime/logicals.sh
 
 test -x bin/mini-rolls
 test -x bin/ROLS6100
@@ -35,4 +37,5 @@ test -x bin/ui-ROLS6023
 ./tests/form-config.sh
 ./tests/tui-form.sh
 ./tests/auto-id.sh
+./tests/architecture.sh
 echo "PASS: v8 legacy/runtime separation checks"

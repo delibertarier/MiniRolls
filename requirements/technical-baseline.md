@@ -22,3 +22,15 @@ for static analysis while retaining a locally executable macOS test profile.
 ## REQ-TEC-006 Jobs and forms
 The corpus shall contain legacy-looking JOB and layout artifacts so that
 cross-artifact dependency extraction can be evaluated.
+
+## REQ-TEC-007 License and platform boundary
+The compiled local profile shall remain runnable on Apple Silicon with
+GnuCOBOL and the Python standard library. It shall not require HP COBOL,
+OpenVMS, commercial Formgen, or Oracle/Pro*COBOL. Production-like ASSIGN
+logicals (ORDERS, CUSTOMERS, PRODUCTS, HISTORY) are resolved locally via
+environment mapping. Embedded SQL and Oracle schema remain analysis
+artifacts under sql/, never part of the local link step.
+
+## REQ-TEC-008 File assignment
+COBOL FILE-CONTROL shall ASSIGN TO implementor-names (OpenVMS logical
+analogs), not POSIX paths. The local runtime supplies the mapping.

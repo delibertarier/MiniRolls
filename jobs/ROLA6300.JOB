@@ -1,5 +1,9 @@
 #!/bin/sh
-# Automatic job: daily report
+# Automatic job ROLA6300 — daily report
+# OpenVMS analog: $ SET DEFAULT ROLLS$DATA  /  $ RUN ROLS6300
 set -e
 cd "$(dirname "$0")/.."
+ROLLS_ROOT="$(pwd)"
+# shellcheck source=../local-runtime/logicals.sh
+. ./local-runtime/logicals.sh
 ./bin/ROLS6300

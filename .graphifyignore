@@ -1,0 +1,8 @@
+# Application graph: COBOL, copy members, screens, jobs, SQL.
+# Keep the local execution harness and docs out of discovery.
+local-runtime/
+tests/
+requirements/
+*.md
+*.sh
+*.lst

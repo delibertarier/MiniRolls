@@ -1,0 +1,903 @@
+{
+  "version": 1,
+  "programs": {
+    "cobol/ROLS0001.COB": {
+      "source_file": "cobol/ROLS0001.COB",
+      "program": "ROLS0001",
+      "kind": "program",
+      "calls": [
+        "ROLS6001",
+        "ROLS6010",
+        "ROLS6020"
+      ],
+      "summary": "ROLS0001\nThe user picks a menu option:\n  1 — ROLS6001\n  2 — ROLS6010\n  3 — ROLS6020\nOther menu choices take a different path."
+    },
+    "cobol/ROLS6001.COB": {
+      "source_file": "cobol/ROLS6001.COB",
+      "program": "ROLS6001",
+      "kind": "program",
+      "calls": [
+        "ROLS6005",
+        "ROLS6002",
+        "ROLS6003",
+        "ROLS6004"
+      ],
+      "used_by": [
+        "ROLS0001"
+      ],
+      "returns": true,
+      "summary": "ROLS6001\nThe user picks a menu option:\n  1 — ROLS6005\n  2 — ROLS6002\n  3 — ROLS6003\n  4 — ROLS6004\nOther menu choices take a different path."
+    },
+    "cobol/ROLS6002.COB": {
+      "source_file": "cobol/ROLS6002.COB",
+      "program": "ROLS6002",
+      "kind": "program",
+      "messages": [
+        "OPEN"
+      ],
+      "calls": [
+        "ROLS9001",
+        "ROLS9002"
+      ],
+      "copies": [
+        "CPM-ORDER",
+        "CPM-PAR9001"
+      ],
+      "files": [
+        "ORDERS"
+      ],
+      "used_by": [
+        "ROLS6001"
+      ],
+      "returns": true,
+      "summary": "ROLS6002 is a program used in the ORDER MANAGEMENT system to create new orders. It accepts customer ID, product ID, and quantity from the user and calls ROLS9001 for validation and ROLS9002 to calculate the order amount. If validation is successful, it adds a new record to the ORDERS file with the order details and displays a confirmation message. If there's an issue, it shows an error message. This program is called by ROLS6001 to manage order creation processes."
+    },
+    "cobol/ROLS6003.COB": {
+      "source_file": "cobol/ROLS6003.COB",
+      "program": "ROLS6003",
+      "kind": "program",
+      "calls": [
+        "ROLS9001"
+      ],
+      "copies": [
+        "CPM-ORDER",
+        "CPM-PAR9001"
+      ],
+      "used_by": [
+        "ROLS6001"
+      ],
+      "returns": true,
+      "summary": "ROLS6003 is a program used in the ORDER MANAGEMENT system where users input an order ID and quantity. It validates the entered information by calling ROLS9001 with the provided parameters. If the validation is successful, it confirms the modification with a message; otherwise, it displays an error message. This program is part of a larger process initiated by ROLS6001."
+    },
+    "cobol/ROLS6004.COB": {
+      "source_file": "cobol/ROLS6004.COB",
+      "program": "ROLS6004",
+      "kind": "program",
+      "messages": [
+        "CANCELLED"
+      ],
+      "calls": [
+        "ROLS9001",
+        "ROLS9003"
+      ],
+      "copies": [
+        "CPM-ORDER",
+        "CPM-PAR9001"
+      ],
+      "files": [
+        "HISTORY"
+      ],
+      "used_by": [
+        "ROLS6001"
+      ],
+      "returns": true,
+      "summary": "ROLS6004 is a program used in the ORDER MANAGEMENT system to cancel an order. It starts by accepting an order ID from the user and then calls ROLS9001 to validate the cancellation request. If the validation is successful, it records the cancellation in the HISTORY file and calls ROLS9003 to finalize the cancellation process. The program then displays a confirmation message to the user and returns to the caller. ROLS6004 is used by ROLS6001 to manage order cancellations effectively."
+    },
+    "cobol/ROLS6005.COB": {
+      "source_file": "cobol/ROLS6005.COB",
+      "program": "ROLS6005",
+      "kind": "program",
+      "files": [
+        "ORDERS"
+      ],
+      "used_by": [
+        "ROLS6001"
+      ],
+      "returns": true,
+      "summary": "ROLS6005 is a program that lists records from the ORDERS file, displaying details such as order ID, customer ID, product ID, quantity, status, and amount. It is used by the ORDER MANAGEMENT screen in ROLS6001 to show order information to users. The program opens the ORDERS file, reads each record, and prints the relevant details before closing the file and returning control to the caller."
+    },
+    "cobol/ROLS6010.COB": {
+      "source_file": "cobol/ROLS6010.COB",
+      "program": "ROLS6010",
+      "kind": "program",
+      "calls": [
+        "ROLS6012",
+        "ROLS6011",
+        "ROLS6013"
+      ],
+      "used_by": [
+        "ROLS0001"
+      ],
+      "returns": true,
+      "summary": "ROLS6010\nThe user picks a menu option:\n  1 — ROLS6013\n  2 — ROLS6012\n  3 — ROLS6011"
+    },
+    "cobol/ROLS6011.COB": {
+      "source_file": "cobol/ROLS6011.COB",
+      "program": "ROLS6011",
+      "kind": "program",
+      "copies": [
+        "CPM-CUSTOMER"
+      ],
+      "files": [
+        "CUSTOMERS"
+      ],
+      "used_by": [
+        "ROLS6010"
+      ],
+      "returns": true,
+      "summary": "ROLS6011 is a program used in the CUSTOMER MANAGEMENT system to add new customer records. It accepts a customer's name from the user and stores it in the CUSTOMERS file with an automatically assigned unique ID. After the record is added, the program displays a confirmation message saying \"OK CUSTOMER STORED ID\" followed by the new customer's ID. This program is called by ROLS6010, which manages customer data and provides the interface for adding new customers."
+    },
+    "cobol/ROLS6012.COB": {
+      "source_file": "cobol/ROLS6012.COB",
+      "program": "ROLS6012",
+      "kind": "program",
+      "calls": [
+        "ROLS9003"
+      ],
+      "copies": [
+        "CPM-CUSTOMER"
+      ],
+      "used_by": [
+        "ROLS6010"
+      ],
+      "returns": true,
+      "summary": "ROLS6012 is a program used in the CUSTOMER MANAGEMENT screen within the Customer Management system. It accepts a customer ID from the user and uses it to call the ROLS9003 program. ROLS6012 is called by ROLS6010, which manages customer data. After calling ROLS9003, the program returns control to the calling program."
+    },
+    "cobol/ROLS6013.COB": {
+      "source_file": "cobol/ROLS6013.COB",
+      "program": "ROLS6013",
+      "kind": "program",
+      "files": [
+        "CUSTOMERS"
+      ],
+      "used_by": [
+        "ROLS6010"
+      ],
+      "returns": true,
+      "summary": "ROLS6013 is a program that lists customer records from the CUSTOMERS file, displaying each customer's ID, name, and status. It is used by the CUSTOMER MANAGEMENT screen in ROLS6010 to provide a list of customers for management purposes. After displaying the records, the program returns control to the calling program."
+    },
+    "cobol/ROLS6020.COB": {
+      "source_file": "cobol/ROLS6020.COB",
+      "program": "ROLS6020",
+      "kind": "program",
+      "calls": [
+        "ROLS6022",
+        "ROLS6021",
+        "ROLS6023"
+      ],
+      "used_by": [
+        "ROLS0001"
+      ],
+      "returns": true,
+      "summary": "ROLS6020\nThe user picks a menu option:\n  1 — ROLS6023\n  2 — ROLS6022\n  3 — ROLS6021"
+    },
+    "cobol/ROLS6021.COB": {
+      "source_file": "cobol/ROLS6021.COB",
+      "program": "ROLS6021",
+      "kind": "program",
+      "copies": [
+        "CPM-PRODUCT"
+      ],
+      "files": [
+        "PRODUCTS"
+      ],
+      "used_by": [
+        "ROLS6020"
+      ],
+      "returns": true,
+      "summary": "ROLS6021 is a program used in the PRODUCT MANAGEMENT system to add new product records. It collects product details such as name, price, and stock from the user. After validating and assigning a unique ID, the program writes the new product information to the PRODUCTS file. Once the record is stored, it displays a confirmation message with the new product ID. This program is called by ROLS6020, which manages product data in the system."
+    },
+    "cobol/ROLS6022.COB": {
+      "source_file": "cobol/ROLS6022.COB",
+      "program": "ROLS6022",
+      "kind": "program",
+      "calls": [
+        "ROLS9003"
+      ],
+      "copies": [
+        "CPM-PRODUCT"
+      ],
+      "used_by": [
+        "ROLS6020"
+      ],
+      "returns": true,
+      "summary": "ROLS6022 is a program used in the PRODUCT MANAGEMENT screen, where users input a product ID. It then calls the ROLS9003 program, passing the product ID to it. ROLS6022 uses data from the CPM-PRODUCT copybook, which includes details like product ID, name, price, and stock. After processing, the program returns control to the caller."
+    },
+    "cobol/ROLS6023.COB": {
+      "source_file": "cobol/ROLS6023.COB",
+      "program": "ROLS6023",
+      "kind": "program",
+      "files": [
+        "PRODUCTS"
+      ],
+      "used_by": [
+        "ROLS6020"
+      ],
+      "returns": true,
+      "summary": "ROLS6023 is a program that lists records from the PRODUCTS file, displaying each product's ID, name, price, and stock level. It is used by the ROLS6020 program, which manages product information in a product management system. The program opens the PRODUCTS file, reads through each record, and prints the details on the screen before returning control to the calling program."
+    },
+    "cobol/ROLS6100.COB": {
+      "source_file": "cobol/ROLS6100.COB",
+      "program": "ROLS6100",
+      "kind": "program",
+      "calls": [
+        "ROLS9003"
+      ],
+      "used_by": [
+        "ROLJ6100"
+      ],
+      "summary": "ROLS6100 is a program that processes open orders in a batch environment. It starts by displaying a message indicating that it is processing open orders. The program then calls ROLS9003, passing an ID value to it. After ROLS9003 completes its task, ROLS6100 displays a message stating that order processing is completed. ROLJ6100 calls ROLS6100 as part of a job process."
+    },
+    "cobol/ROLS6200.COB": {
+      "source_file": "cobol/ROLS6200.COB",
+      "program": "ROLS6200",
+      "kind": "program",
+      "calls": [
+        "ROLS9003"
+      ],
+      "used_by": [
+        "ROLA6200"
+      ],
+      "summary": "ROLS6200 is a program that updates stock information in a batch process. It is called by ROLA6200 as part of a job. After displaying a message indicating the start of the stock update, ROLS6200 calls ROLS9003 with a specific ID to perform the update. Once the update is complete, it displays a confirmation message."
+    },
+    "cobol/ROLS6300.COB": {
+      "source_file": "cobol/ROLS6300.COB",
+      "program": "ROLS6300",
+      "kind": "program",
+      "used_by": [
+        "ROLA6300"
+      ],
+      "summary": "ROLS6300 is a program that generates a daily report in batch mode, displaying information from the files data/orders.dat and data/order_history.dat. It is called by ROLA6300 as part of a job process."
+    },
+    "cobol/ROLS7999.COB": {
+      "source_file": "cobol/ROLS7999.COB",
+      "program": "ROLS7999",
+      "kind": "program",
+      "messages": [
+        "OPEN",
+        "ACME",
+        "ACTIVE",
+        "NORTHWIND",
+        "DIESEL",
+        "GASOIL"
+      ],
+      "files": [
+        "ORDERS",
+        "CUSTOMERS",
+        "PRODUCTS"
+      ],
+      "summary": "ROLS7999 is a program that creates new records in the ORDERS, CUSTOMERS, and PRODUCTS files. It writes customer information for ACME and NORTHWIND, both marked as ACTIVE, and adds product details for DIESEL and GASOIL, specifying their prices and stock levels. The program does not receive calls from any other programs."
+    },
+    "cobol/ROLS9001.COB": {
+      "source_file": "cobol/ROLS9001.COB",
+      "program": "ROLS9001",
+      "kind": "program",
+      "using": [
+        "VALIDATION-PARAMETERS"
+      ],
+      "using_labels": [
+        "validation parameters"
+      ],
+      "messages": [
+        "Y",
+        "N",
+        "Order id must be greater than zero",
+        "Quantity must be greater than zero"
+      ],
+      "copies": [
+        "CPM-PAR9001"
+      ],
+      "used_by": [
+        "ROLS6002",
+        "ROLS6003",
+        "ROLS6004"
+      ],
+      "returns": true,
+      "summary": "ROLS9001 is a program that validates order creation, modification, and cancellation requests. It checks if the order ID and quantity provided are greater than zero, ensuring data integrity. This program is called by ROLS6002 for creating orders, ROLS6003 for modifying orders, and ROLS6004 for canceling orders. After validation, ROLS9001 returns a result and message to the caller indicating whether the validation was successful or not."
+    },
+    "cobol/ROLS9002.COB": {
+      "source_file": "cobol/ROLS9002.COB",
+      "program": "ROLS9002",
+      "kind": "program",
+      "using": [
+        "LK-PRODUCT-ID",
+        "LK-QUANTITY",
+        "LK-AMOUNT"
+      ],
+      "using_labels": [
+        "product id",
+        "quantity",
+        "amount"
+      ],
+      "linkage_fields": [
+        "LK-PRODUCT-ID",
+        "LK-QUANTITY",
+        "LK-AMOUNT"
+      ],
+      "computes": [
+        "LK-AMOUNT"
+      ],
+      "used_by": [
+        "ROLS6002"
+      ],
+      "returns": true,
+      "summary": "ROLS9002 is a program that calculates the total amount for an order based on the quantity and product ID provided. It is called by the ROLLS - CREATE ORDER screen through the ROLS6002 program, which handles the creation of new orders. The program multiplies the quantity by a fixed price to determine the amount, and then returns this calculated amount back to the calling program."
+    },
+    "cobol/ROLS9003.COB": {
+      "source_file": "cobol/ROLS9003.COB",
+      "program": "ROLS9003",
+      "kind": "program",
+      "using": [
+        "LK-ID"
+      ],
+      "using_labels": [
+        "id"
+      ],
+      "linkage_fields": [
+        "LK-ID"
+      ],
+      "used_by": [
+        "ROLS6004",
+        "ROLS6012",
+        "ROLS6022",
+        "ROLS6100",
+        "ROLS6200"
+      ],
+      "returns": true,
+      "summary": "ROLS9003 is a common lookup routine used by various ROLS programs to retrieve information based on an ID. It is called by ROLS6004 to cancel orders, by ROLS6012 to search for customer details, and by ROLS6022 to find product information. Additionally, ROLS6100 and ROLS6200 also initiate ROLS9003 as needed. The program displays a message indicating the ID being looked up and then exits."
+    },
+    "copylib/CPM-COMMON.TXT": {
+      "source_file": "copylib/CPM-COMMON.TXT",
+      "program": "CPM-COMMON",
+      "kind": "copybook",
+      "fields": [
+        "COM-RETURN-CODE",
+        "COM-MESSAGE"
+      ],
+      "summary": "CPM-COMMON\nCopybook.\nRecord COMMON-AREA.\nFields: return code, message."
+    },
+    "copylib/CPM-CUSTOMER.TXT": {
+      "source_file": "copylib/CPM-CUSTOMER.TXT",
+      "program": "CPM-CUSTOMER",
+      "kind": "copybook",
+      "fields": [
+        "CUS-ID",
+        "CUS-NAME",
+        "CUS-STATUS"
+      ],
+      "used_by": [
+        "ROLS6011",
+        "ROLS6012"
+      ],
+      "summary": "CPM-CUSTOMER\nCopybook.\nRecord CUSTOMER-REC.\nFields: id, name, status.\nUsed by: ROLS6011, ROLS6012."
+    },
+    "copylib/CPM-ORDER.TXT": {
+      "source_file": "copylib/CPM-ORDER.TXT",
+      "program": "CPM-ORDER",
+      "kind": "copybook",
+      "fields": [
+        "ORD-ID",
+        "ORD-CUSTOMER-ID",
+        "ORD-PRODUCT-ID",
+        "ORD-QUANTITY",
+        "ORD-STATUS",
+        "ORD-AMOUNT"
+      ],
+      "used_by": [
+        "ROLS6002",
+        "ROLS6003",
+        "ROLS6004"
+      ],
+      "summary": "CPM-ORDER\nCopybook.\nRecord ORDER-REC.\nFields: id, customer id, product id, quantity, status, amount.\nUsed by: ROLS6002, ROLS6003, ROLS6004."
+    },
+    "copylib/CPM-PAR9001.TXT": {
+      "source_file": "copylib/CPM-PAR9001.TXT",
+      "program": "CPM-PAR9001",
+      "kind": "copybook",
+      "fields": [
+        "VAL-ORDER-ID",
+        "VAL-QUANTITY",
+        "VAL-RESULT",
+        "VAL-MESSAGE"
+      ],
+      "used_by": [
+        "ROLS6002",
+        "ROLS6003",
+        "ROLS6004",
+        "ROLS9001"
+      ],
+      "summary": "CPM-PAR9001\nCopybook.\nRecord VALIDATION-PARAMETERS.\nFields: order id, quantity, result, message.\nUsed by: ROLS6002, ROLS6003, ROLS6004, ROLS9001."
+    },
+    "copylib/CPM-PRODUCT.TXT": {
+      "source_file": "copylib/CPM-PRODUCT.TXT",
+      "program": "CPM-PRODUCT",
+      "kind": "copybook",
+      "fields": [
+        "PRD-ID",
+        "PRD-NAME",
+        "PRD-PRICE",
+        "PRD-STOCK"
+      ],
+      "used_by": [
+        "ROLS6021",
+        "ROLS6022"
+      ],
+      "summary": "CPM-PRODUCT\nCopybook.\nRecord PRODUCT-REC.\nFields: id, name, price, stock.\nUsed by: ROLS6021, ROLS6022."
+    },
+    "forms/ROLS0001.LAY": {
+      "source_file": "forms/ROLS0001.LAY",
+      "program": "ROLS0001",
+      "kind": "screen",
+      "title": "MINI-ROLLS MAIN MENU",
+      "calls": [
+        "ROLS6001",
+        "ROLS6010",
+        "ROLS6020"
+      ],
+      "screen_actions": [
+        {
+          "choice": "1",
+          "label": "Order management",
+          "program": "ROLS6001"
+        },
+        {
+          "choice": "2",
+          "label": "Customer management",
+          "program": "ROLS6010"
+        },
+        {
+          "choice": "3",
+          "label": "Product management",
+          "program": "ROLS6020"
+        }
+      ],
+      "summary": "ROLS0001\nScreen: MINI-ROLLS MAIN MENU.\nThe user picks a menu option:\n  Order management — ROLS6001\n  Customer management — ROLS6010\n  Product management — ROLS6020"
+    },
+    "forms/ROLS6001.LAY": {
+      "source_file": "forms/ROLS6001.LAY",
+      "program": "ROLS6001",
+      "kind": "screen",
+      "title": "ORDER MANAGEMENT",
+      "calls": [
+        "ROLS6005",
+        "ROLS6002",
+        "ROLS6003",
+        "ROLS6004"
+      ],
+      "used_by": [
+        "ROLS0001"
+      ],
+      "screen_actions": [
+        {
+          "choice": "1",
+          "label": "List orders",
+          "program": "ROLS6005"
+        },
+        {
+          "choice": "2",
+          "label": "Create order",
+          "program": "ROLS6002"
+        },
+        {
+          "choice": "3",
+          "label": "Modify order",
+          "program": "ROLS6003"
+        },
+        {
+          "choice": "4",
+          "label": "Cancel order",
+          "program": "ROLS6004"
+        }
+      ],
+      "summary": "ROLS6001\nScreen: ORDER MANAGEMENT.\nThe user picks a menu option:\n  List orders — ROLS6005\n  Create order — ROLS6002\n  Modify order — ROLS6003\n  Cancel order — ROLS6004\nUsed by: ROLS0001."
+    },
+    "forms/ROLS6002.LAY": {
+      "source_file": "forms/ROLS6002.LAY",
+      "program": "ROLS6002",
+      "kind": "screen",
+      "title": "ROLLS - CREATE ORDER",
+      "calls": [
+        "ROLS6002"
+      ],
+      "used_by": [
+        "ROLS6001"
+      ],
+      "screen_fields": [
+        {
+          "name": "ORD-CUSTOMER-ID",
+          "label": "Customer"
+        },
+        {
+          "name": "ORD-PRODUCT-ID",
+          "label": "Product"
+        },
+        {
+          "name": "ORD-QUANTITY",
+          "label": "Quantity"
+        }
+      ],
+      "screen_actions": [
+        {
+          "choice": "SAVE",
+          "label": "Save",
+          "program": "ROLS6002"
+        }
+      ],
+      "summary": "ROLS6002\nScreen: ROLLS - CREATE ORDER.\nFields: Customer, Product, Quantity.\nThe user picks a menu option:\n  Save — ROLS6002\nUsed by: ROLS6001."
+    },
+    "forms/ROLS6003.LAY": {
+      "source_file": "forms/ROLS6003.LAY",
+      "program": "ROLS6003",
+      "kind": "screen",
+      "title": "ROLLS - MODIFY ORDER",
+      "calls": [
+        "ROLS6003"
+      ],
+      "used_by": [
+        "ROLS6001"
+      ],
+      "screen_fields": [
+        {
+          "name": "ORD-ID",
+          "label": "Order id"
+        },
+        {
+          "name": "ORD-QUANTITY",
+          "label": "New quantity"
+        }
+      ],
+      "screen_actions": [
+        {
+          "choice": "SAVE",
+          "label": "Save",
+          "program": "ROLS6003"
+        }
+      ],
+      "summary": "ROLS6003\nScreen: ROLLS - MODIFY ORDER.\nFields: Order id, New quantity.\nThe user picks a menu option:\n  Save — ROLS6003\nUsed by: ROLS6001."
+    },
+    "forms/ROLS6004.LAY": {
+      "source_file": "forms/ROLS6004.LAY",
+      "program": "ROLS6004",
+      "kind": "screen",
+      "title": "ROLLS - CANCEL ORDER",
+      "calls": [
+        "ROLS6004"
+      ],
+      "used_by": [
+        "ROLS6001"
+      ],
+      "screen_fields": [
+        {
+          "name": "ORD-ID",
+          "label": "Order id"
+        }
+      ],
+      "screen_actions": [
+        {
+          "choice": "SAVE",
+          "label": "Cancel order",
+          "program": "ROLS6004"
+        }
+      ],
+      "summary": "ROLS6004\nScreen: ROLLS - CANCEL ORDER.\nFields: Order id.\nThe user picks a menu option:\n  Cancel order — ROLS6004\nUsed by: ROLS6001."
+    },
+    "forms/ROLS6005.LAY": {
+      "source_file": "forms/ROLS6005.LAY",
+      "program": "ROLS6005",
+      "kind": "screen",
+      "title": "ROLLS - LIST ORDERS",
+      "calls": [
+        "ROLS6005"
+      ],
+      "used_by": [
+        "ROLS6001"
+      ],
+      "screen_actions": [
+        {
+          "choice": "LIST",
+          "label": "List",
+          "program": "ROLS6005"
+        }
+      ],
+      "summary": "ROLS6005\nScreen: ROLLS - LIST ORDERS.\nThe user picks a menu option:\n  List — ROLS6005\nUsed by: ROLS6001."
+    },
+    "forms/ROLS6010.LAY": {
+      "source_file": "forms/ROLS6010.LAY",
+      "program": "ROLS6010",
+      "kind": "screen",
+      "title": "CUSTOMER MANAGEMENT",
+      "calls": [
+        "ROLS6013",
+        "ROLS6012",
+        "ROLS6011"
+      ],
+      "used_by": [
+        "ROLS0001"
+      ],
+      "screen_actions": [
+        {
+          "choice": "1",
+          "label": "List customers",
+          "program": "ROLS6013"
+        },
+        {
+          "choice": "2",
+          "label": "Search customer",
+          "program": "ROLS6012"
+        },
+        {
+          "choice": "3",
+          "label": "Create customer",
+          "program": "ROLS6011"
+        }
+      ],
+      "summary": "ROLS6010\nScreen: CUSTOMER MANAGEMENT.\nThe user picks a menu option:\n  List customers — ROLS6013\n  Search customer — ROLS6012\n  Create customer — ROLS6011\nUsed by: ROLS0001."
+    },
+    "forms/ROLS6011.LAY": {
+      "source_file": "forms/ROLS6011.LAY",
+      "program": "ROLS6011",
+      "kind": "screen",
+      "title": "ROLLS - CUSTOMER MAINTENANCE",
+      "calls": [
+        "ROLS6011"
+      ],
+      "used_by": [
+        "ROLS6010"
+      ],
+      "screen_fields": [
+        {
+          "name": "CUS-NAME",
+          "label": "Name"
+        }
+      ],
+      "screen_actions": [
+        {
+          "choice": "SAVE",
+          "label": "Save",
+          "program": "ROLS6011"
+        }
+      ],
+      "summary": "ROLS6011\nScreen: ROLLS - CUSTOMER MAINTENANCE.\nFields: Name.\nThe user picks a menu option:\n  Save — ROLS6011\nUsed by: ROLS6010."
+    },
+    "forms/ROLS6012.LAY": {
+      "source_file": "forms/ROLS6012.LAY",
+      "program": "ROLS6012",
+      "kind": "screen",
+      "title": "ROLLS - CUSTOMER SEARCH",
+      "calls": [
+        "ROLS6012"
+      ],
+      "used_by": [
+        "ROLS6010"
+      ],
+      "screen_fields": [
+        {
+          "name": "CUS-ID",
+          "label": "Customer id"
+        }
+      ],
+      "screen_actions": [
+        {
+          "choice": "SEARCH",
+          "label": "Search",
+          "program": "ROLS6012"
+        }
+      ],
+      "summary": "ROLS6012\nScreen: ROLLS - CUSTOMER SEARCH.\nFields: Customer id.\nThe user picks a menu option:\n  Search — ROLS6012\nUsed by: ROLS6010."
+    },
+    "forms/ROLS6013.LAY": {
+      "source_file": "forms/ROLS6013.LAY",
+      "program": "ROLS6013",
+      "kind": "screen",
+      "title": "ROLLS - LIST CUSTOMERS",
+      "calls": [
+        "ROLS6013"
+      ],
+      "used_by": [
+        "ROLS6010"
+      ],
+      "screen_actions": [
+        {
+          "choice": "LIST",
+          "label": "List",
+          "program": "ROLS6013"
+        }
+      ],
+      "summary": "ROLS6013\nScreen: ROLLS - LIST CUSTOMERS.\nThe user picks a menu option:\n  List — ROLS6013\nUsed by: ROLS6010."
+    },
+    "forms/ROLS6020.LAY": {
+      "source_file": "forms/ROLS6020.LAY",
+      "program": "ROLS6020",
+      "kind": "screen",
+      "title": "PRODUCT MANAGEMENT",
+      "calls": [
+        "ROLS6023",
+        "ROLS6022",
+        "ROLS6021"
+      ],
+      "used_by": [
+        "ROLS0001"
+      ],
+      "screen_actions": [
+        {
+          "choice": "1",
+          "label": "List products",
+          "program": "ROLS6023"
+        },
+        {
+          "choice": "2",
+          "label": "Search product",
+          "program": "ROLS6022"
+        },
+        {
+          "choice": "3",
+          "label": "Create product",
+          "program": "ROLS6021"
+        }
+      ],
+      "summary": "ROLS6020\nScreen: PRODUCT MANAGEMENT.\nThe user picks a menu option:\n  List products — ROLS6023\n  Search product — ROLS6022\n  Create product — ROLS6021\nUsed by: ROLS0001."
+    },
+    "forms/ROLS6021.LAY": {
+      "source_file": "forms/ROLS6021.LAY",
+      "program": "ROLS6021",
+      "kind": "screen",
+      "title": "ROLLS - PRODUCT MAINTENANCE",
+      "calls": [
+        "ROLS6021"
+      ],
+      "used_by": [
+        "ROLS6020"
+      ],
+      "screen_fields": [
+        {
+          "name": "PRD-NAME",
+          "label": "Name"
+        },
+        {
+          "name": "PRD-PRICE",
+          "label": "Price cents"
+        },
+        {
+          "name": "PRD-STOCK",
+          "label": "Stock"
+        }
+      ],
+      "screen_actions": [
+        {
+          "choice": "SAVE",
+          "label": "Save",
+          "program": "ROLS6021"
+        }
+      ],
+      "summary": "ROLS6021\nScreen: ROLLS - PRODUCT MAINTENANCE.\nFields: Name, Price cents, Stock.\nThe user picks a menu option:\n  Save — ROLS6021\nUsed by: ROLS6020."
+    },
+    "forms/ROLS6022.LAY": {
+      "source_file": "forms/ROLS6022.LAY",
+      "program": "ROLS6022",
+      "kind": "screen",
+      "title": "ROLLS - PRODUCT SEARCH",
+      "calls": [
+        "ROLS6022"
+      ],
+      "used_by": [
+        "ROLS6020"
+      ],
+      "screen_fields": [
+        {
+          "name": "PRD-ID",
+          "label": "Product id"
+        }
+      ],
+      "screen_actions": [
+        {
+          "choice": "SEARCH",
+          "label": "Search",
+          "program": "ROLS6022"
+        }
+      ],
+      "summary": "ROLS6022\nScreen: ROLLS - PRODUCT SEARCH.\nFields: Product id.\nThe user picks a menu option:\n  Search — ROLS6022\nUsed by: ROLS6020."
+    },
+    "forms/ROLS6023.LAY": {
+      "source_file": "forms/ROLS6023.LAY",
+      "program": "ROLS6023",
+      "kind": "screen",
+      "title": "ROLLS - LIST PRODUCTS",
+      "calls": [
+        "ROLS6023"
+      ],
+      "used_by": [
+        "ROLS6020"
+      ],
+      "screen_actions": [
+        {
+          "choice": "LIST",
+          "label": "List",
+          "program": "ROLS6023"
+        }
+      ],
+      "summary": "ROLS6023\nScreen: ROLLS - LIST PRODUCTS.\nThe user picks a menu option:\n  List — ROLS6023\nUsed by: ROLS6020."
+    },
+    "jobs/ROLA6200.JOB": {
+      "source_file": "jobs/ROLA6200.JOB",
+      "program": "ROLA6200",
+      "kind": "job",
+      "calls": [
+        "ROLS6200"
+      ],
+      "summary": "ROLA6200\nJob.\nStarts ROLS6200."
+    },
+    "jobs/ROLA6300.JOB": {
+      "source_file": "jobs/ROLA6300.JOB",
+      "program": "ROLA6300",
+      "kind": "job",
+      "calls": [
+        "ROLS6300"
+      ],
+      "summary": "ROLA6300\nJob.\nStarts ROLS6300."
+    },
+    "jobs/ROLJ6100.JOB": {
+      "source_file": "jobs/ROLJ6100.JOB",
+      "program": "ROLJ6100",
+      "kind": "job",
+      "calls": [
+        "ROLS6100"
+      ],
+      "summary": "ROLJ6100\nJob.\nStarts ROLS6100."
+    },
+    "sql/ROLS6200.SQL": {
+      "source_file": "sql/ROLS6200.SQL",
+      "program": "ROLS6200",
+      "kind": "sql",
+      "tables": [
+        "ORDERS",
+        "ORDER_LINE"
+      ],
+      "summary": "ROLS6200\nSQL.\nTables: ORDERS, ORDER_LINE."
+    },
+    "sql/ROLS6300.SQL": {
+      "source_file": "sql/ROLS6300.SQL",
+      "program": "ROLS6300",
+      "kind": "sql",
+      "tables": [
+        "ORDERS"
+      ],
+      "summary": "ROLS6300\nSQL.\nTables: ORDERS."
+    },
+    "sql/oracle-as-is-schema.sql": {
+      "source_file": "sql/oracle-as-is-schema.sql",
+      "program": "ORACLE-AS-IS-SCHEMA",
+      "kind": "sql",
+      "tables": [
+        "CUSTOMER",
+        "PRODUCT",
+        "ORDERS",
+        "ORDER_HISTORY"
+      ],
+      "summary": "ORACLE-AS-IS-SCHEMA\nSQL.\nTables: CUSTOMER, PRODUCT, ORDERS, ORDER_HISTORY."
+    },
+    "sql/schema.sql": {
+      "source_file": "sql/schema.sql",
+      "program": "SCHEMA",
+      "kind": "sql",
+      "tables": [
+        "CUSTOMER",
+        "PRODUCT",
+        "ORDERS",
+        "ORDER_LINE",
+        "ORDER_HISTORY",
+        "STOCK_MOVEMENT"
+      ],
+      "summary": "SCHEMA\nSQL.\nTables: CUSTOMER, PRODUCT, ORDERS, ORDER_LINE, ORDER_HISTORY, STOCK_MOVEMENT."
+    }
+  }
+}

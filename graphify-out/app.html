@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>mini-rolls-v9</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f0f1a; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; height: 100vh; }
+  #nav { width: 400px; background: #1a1a2e; border-right: 1px solid #2a2a4e; display: flex; flex-direction: column; }
+  header { padding: 16px 18px 12px; border-bottom: 1px solid #2a2a4e; }
+  header h1 { font-size: 16px; }
+  header p { color: #888; font-size: 12px; margin-top: 6px; line-height: 1.45; }
+  header a { color: #8ab4ff; }
+  #tree { flex: 1; overflow: auto; padding: 8px 10px 24px; }
+  .section { color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; margin: 16px 8px 6px; }
+  .item { display: block; width: 100%; text-align: left; background: none; border: 0; color: #ddd; padding: 7px 10px; border-radius: 6px; cursor: pointer; font: inherit; }
+  .item:hover, .item.active { background: #2a2a4e; }
+  .item .id { font-family: ui-monospace, Menlo, monospace; color: #8ab4ff; margin-right: 8px; }
+  .item .title { color: #bbb; }
+  .choice { color: #888; font-family: ui-monospace, Menlo, monospace; margin-right: 6px; }
+  .children { margin-left: 16px; border-left: 1px solid #2a2a4e; padding-left: 4px; }
+  #detail { flex: 1; padding: 28px 36px; overflow: auto; }
+  #detail h2 { font-size: 22px; margin-bottom: 6px; }
+  #detail .meta { color: #888; font-size: 13px; margin-bottom: 18px; }
+  #brief { white-space: pre-wrap; background: #12122a; border: 1px solid #2a2a4e; border-radius: 8px; padding: 16px; font-family: ui-monospace, Menlo, monospace; font-size: 13px; line-height: 1.55; }
+  .empty { color: #666; font-style: italic; }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <header>
+    <h1>mini-rolls-v9</h1>
+    <p>One menu tree: screens plus COBOL WHEN/CALL. The force-directed view is <a href="graph.html">graph.html</a>.</p>
+  </header>
+  <div id="tree"></div>
+</nav>
+<main id="detail">
+  <p class="empty">Pick a program. A screen and its COBOL program are one entry when they share a name.</p>
+</main>
+<script>
+const DATA = {"app_name": "mini-rolls-v9", "programs": {"ROLS0001": {"source_file": "cobol/ROLS0001.COB", "summary": "ROLS0001\nThe user picks a menu option:\n  1 \u2014 ROLS6001\n  2 \u2014 ROLS6010\n  3 \u2014 ROLS6020\nOther menu choices take a different path.", "title": "MINI-ROLLS MAIN MENU", "screen_file": "forms/ROLS0001.LAY"}, "ROLS6001": {"source_file": "cobol/ROLS6001.COB", "summary": "ROLS6001\nThe user picks a menu option:\n  1 \u2014 ROLS6005\n  2 \u2014 ROLS6002\n  3 \u2014 ROLS6003\n  4 \u2014 ROLS6004\nOther menu choices take a different path.", "title": "ORDER MANAGEMENT", "screen_file": "forms/ROLS6001.LAY"}, "ROLS6002": {"source_file": "cobol/ROLS6002.COB", "summary": "ROLS6002 is a program used in the ORDER MANAGEMENT system to create new orders. It accepts customer ID, product ID, and quantity from the user and calls ROLS9001 for validation and ROLS9002 to calculate the order amount. If validation is successful, it adds a new record to the ORDERS file with the order details and displays a confirmation message. If there's an issue, it shows an error message. This program is called by ROLS6001 to manage order creation processes.", "title": "ROLLS - CREATE ORDER", "screen_file": "forms/ROLS6002.LAY"}, "ROLS6003": {"source_file": "cobol/ROLS6003.COB", "summary": "ROLS6003 is a program used in the ORDER MANAGEMENT system where users input an order ID and quantity. It validates the entered information by calling ROLS9001 with the provided parameters. If the validation is successful, it confirms the modification with a message; otherwise, it displays an error message. This program is part of a larger process initiated by ROLS6001.", "title": "ROLLS - MODIFY ORDER", "screen_file": "forms/ROLS6003.LAY"}, "ROLS6004": {"source_file": "cobol/ROLS6004.COB", "summary": "ROLS6004 is a program used in the ORDER MANAGEMENT system to cancel an order. It starts by accepting an order ID from the user and then calls ROLS9001 to validate the cancellation request. If the validation is successful, it records the cancellation in the HISTORY file and calls ROLS9003 to finalize the cancellation process. The program then displays a confirmation message to the user and returns to the caller. ROLS6004 is used by ROLS6001 to manage order cancellations effectively.", "title": "ROLLS - CANCEL ORDER", "screen_file": "forms/ROLS6004.LAY"}, "ROLS6005": {"source_file": "cobol/ROLS6005.COB", "summary": "ROLS6005 is a program that lists records from the ORDERS file, displaying details such as order ID, customer ID, product ID, quantity, status, and amount. It is used by the ORDER MANAGEMENT screen in ROLS6001 to show order information to users. The program opens the ORDERS file, reads each record, and prints the relevant details before closing the file and returning control to the caller.", "title": "ROLLS - LIST ORDERS", "screen_file": "forms/ROLS6005.LAY"}, "ROLS6010": {"source_file": "cobol/ROLS6010.COB", "summary": "ROLS6010\nThe user picks a menu option:\n  1 \u2014 ROLS6013\n  2 \u2014 ROLS6012\n  3 \u2014 ROLS6011", "title": "CUSTOMER MANAGEMENT", "screen_file": "forms/ROLS6010.LAY"}, "ROLS6011": {"source_file": "cobol/ROLS6011.COB", "summary": "ROLS6011 is a program used in the CUSTOMER MANAGEMENT system to add new customer records. It accepts a customer's name from the user and stores it in the CUSTOMERS file with an automatically assigned unique ID. After the record is added, the program displays a confirmation message saying \"OK CUSTOMER STORED ID\" followed by the new customer's ID. This program is called by ROLS6010, which manages customer data and provides the interface for adding new customers.", "title": "ROLLS - CUSTOMER MAINTENANCE", "screen_file": "forms/ROLS6011.LAY"}, "ROLS6012": {"source_file": "cobol/ROLS6012.COB", "summary": "ROLS6012 is a program used in the CUSTOMER MANAGEMENT screen within the Customer Management system. It accepts a customer ID from the user and uses it to call the ROLS9003 program. ROLS6012 is called by ROLS6010, which manages customer data. After calling ROLS9003, the program returns control to the calling program.", "title": "ROLLS - CUSTOMER SEARCH", "screen_file": "forms/ROLS6012.LAY"}, "ROLS6013": {"source_file": "cobol/ROLS6013.COB", "summary": "ROLS6013 is a program that lists customer records from the CUSTOMERS file, displaying each customer's ID, name, and status. It is used by the CUSTOMER MANAGEMENT screen in ROLS6010 to provide a list of customers for management purposes. After displaying the records, the program returns control to the calling program.", "title": "ROLLS - LIST CUSTOMERS", "screen_file": "forms/ROLS6013.LAY"}, "ROLS6020": {"source_file": "cobol/ROLS6020.COB", "summary": "ROLS6020\nThe user picks a menu option:\n  1 \u2014 ROLS6023\n  2 \u2014 ROLS6022\n  3 \u2014 ROLS6021", "title": "PRODUCT MANAGEMENT", "screen_file": "forms/ROLS6020.LAY"}, "ROLS6021": {"source_file": "cobol/ROLS6021.COB", "summary": "ROLS6021 is a program used in the PRODUCT MANAGEMENT system to add new product records. It collects product details such as name, price, and stock from the user. After validating and assigning a unique ID, the program writes the new product information to the PRODUCTS file. Once the record is stored, it displays a confirmation message with the new product ID. This program is called by ROLS6020, which manages product data in the system.", "title": "ROLLS - PRODUCT MAINTENANCE", "screen_file": "forms/ROLS6021.LAY"}, "ROLS6022": {"source_file": "cobol/ROLS6022.COB", "summary": "ROLS6022 is a program used in the PRODUCT MANAGEMENT screen, where users input a product ID. It then calls the ROLS9003 program, passing the product ID to it. ROLS6022 uses data from the CPM-PRODUCT copybook, which includes details like product ID, name, price, and stock. After processing, the program returns control to the caller.", "title": "ROLLS - PRODUCT SEARCH", "screen_file": "forms/ROLS6022.LAY"}, "ROLS6023": {"source_file": "cobol/ROLS6023.COB", "summary": "ROLS6023 is a program that lists records from the PRODUCTS file, displaying each product's ID, name, price, and stock level. It is used by the ROLS6020 program, which manages product information in a product management system. The program opens the PRODUCTS file, reads through each record, and prints the details on the screen before returning control to the calling program.", "title": "ROLLS - LIST PRODUCTS", "screen_file": "forms/ROLS6023.LAY"}, "ROLS6100": {"source_file": "cobol/ROLS6100.COB", "summary": "ROLS6100 is a program that processes open orders in a batch environment. It starts by displaying a message indicating that it is processing open orders. The program then calls ROLS9003, passing an ID value to it. After ROLS9003 completes its task, ROLS6100 displays a message stating that order processing is completed. ROLJ6100 calls ROLS6100 as part of a job process.", "title": ""}, "ROLS6200": {"source_file": "cobol/ROLS6200.COB", "summary": "ROLS6200 is a program that updates stock information in a batch process. It is called by ROLA6200 as part of a job. After displaying a message indicating the start of the stock update, ROLS6200 calls ROLS9003 with a specific ID to perform the update. Once the update is complete, it displays a confirmation message.", "title": ""}, "ROLS6300": {"source_file": "cobol/ROLS6300.COB", "summary": "ROLS6300 is a program that generates a daily report in batch mode, displaying information from the files data/orders.dat and data/order_history.dat. It is called by ROLA6300 as part of a job process.", "title": ""}, "ROLS7999": {"source_file": "cobol/ROLS7999.COB", "summary": "ROLS7999 is a program that creates new records in the ORDERS, CUSTOMERS, and PRODUCTS files. It writes customer information for ACME and NORTHWIND, both marked as ACTIVE, and adds product details for DIESEL and GASOIL, specifying their prices and stock levels. The program does not receive calls from any other programs.", "title": ""}, "ROLS9001": {"source_file": "cobol/ROLS9001.COB", "summary": "ROLS9001 is a program that validates order creation, modification, and cancellation requests. It checks if the order ID and quantity provided are greater than zero, ensuring data integrity. This program is called by ROLS6002 for creating orders, ROLS6003 for modifying orders, and ROLS6004 for canceling orders. After validation, ROLS9001 returns a result and message to the caller indicating whether the validation was successful or not.", "title": ""}, "ROLS9002": {"source_file": "cobol/ROLS9002.COB", "summary": "ROLS9002 is a program that calculates the total amount for an order based on the quantity and product ID provided. It is called by the ROLLS - CREATE ORDER screen through the ROLS6002 program, which handles the creation of new orders. The program multiplies the quantity by a fixed price to determine the amount, and then returns this calculated amount back to the calling program.", "title": ""}, "ROLS9003": {"source_file": "cobol/ROLS9003.COB", "summary": "ROLS9003 is a common lookup routine used by various ROLS programs to retrieve information based on an ID. It is called by ROLS6004 to cancel orders, by ROLS6012 to search for customer details, and by ROLS6022 to find product information. Additionally, ROLS6100 and ROLS6200 also initiate ROLS9003 as needed. The program displays a message indicating the ID being looked up and then exits.", "title": ""}, "CPM-COMMON": {"source_file": "copylib/CPM-COMMON.TXT", "summary": "CPM-COMMON\nCopybook.\nRecord COMMON-AREA.\nFields: return code, message.", "title": ""}, "CPM-CUSTOMER": {"source_file": "copylib/CPM-CUSTOMER.TXT", "summary": "CPM-CUSTOMER\nCopybook.\nRecord CUSTOMER-REC.\nFields: id, name, status.\nUsed by: ROLS6011, ROLS6012.", "title": ""}, "CPM-ORDER": {"source_file": "copylib/CPM-ORDER.TXT", "summary": "CPM-ORDER\nCopybook.\nRecord ORDER-REC.\nFields: id, customer id, product id, quantity, status, amount.\nUsed by: ROLS6002, ROLS6003, ROLS6004.", "title": ""}, "CPM-PAR9001": {"source_file": "copylib/CPM-PAR9001.TXT", "summary": "CPM-PAR9001\nCopybook.\nRecord VALIDATION-PARAMETERS.\nFields: order id, quantity, result, message.\nUsed by: ROLS6002, ROLS6003, ROLS6004, ROLS9001.", "title": ""}, "CPM-PRODUCT": {"source_file": "copylib/CPM-PRODUCT.TXT", "summary": "CPM-PRODUCT\nCopybook.\nRecord PRODUCT-REC.\nFields: id, name, price, stock.\nUsed by: ROLS6021, ROLS6022.", "title": ""}, "ROLA6200": {"source_file": "jobs/ROLA6200.JOB", "summary": "ROLA6200\nJob.\nStarts ROLS6200.", "title": ""}, "ROLA6300": {"source_file": "jobs/ROLA6300.JOB", "summary": "ROLA6300\nJob.\nStarts ROLS6300.", "title": ""}, "ROLJ6100": {"source_file": "jobs/ROLJ6100.JOB", "summary": "ROLJ6100\nJob.\nStarts ROLS6100.", "title": ""}, "SQL/ROLS6200": {"source_file": "sql/ROLS6200.SQL", "summary": "ROLS6200\nSQL.\nTables: ORDERS, ORDER_LINE.", "title": ""}, "SQL/ROLS6300": {"source_file": "sql/ROLS6300.SQL", "summary": "ROLS6300\nSQL.\nTables: ORDERS.", "title": ""}, "ORACLE-AS-IS-SCHEMA": {"source_file": "sql/oracle-as-is-schema.sql", "summary": "ORACLE-AS-IS-SCHEMA\nSQL.\nTables: CUSTOMER, PRODUCT, ORDERS, ORDER_HISTORY.", "title": ""}, "SCHEMA": {"source_file": "sql/schema.sql", "summary": "SCHEMA\nSQL.\nTables: CUSTOMER, PRODUCT, ORDERS, ORDER_LINE, ORDER_HISTORY, STOCK_MOVEMENT.", "title": ""}}, "menus": {"ROLS0001": [{"choice": "Order management", "program": "ROLS6001"}, {"choice": "Customer management", "program": "ROLS6010"}, {"choice": "Product management", "program": "ROLS6020"}], "ROLS6001": [{"choice": "List orders", "program": "ROLS6005"}, {"choice": "Create order", "program": "ROLS6002"}, {"choice": "Modify order", "program": "ROLS6003"}, {"choice": "Cancel order", "program": "ROLS6004"}], "ROLS6010": [{"choice": "List customers", "program": "ROLS6013"}, {"choice": "Search customer", "program": "ROLS6012"}, {"choice": "Create customer", "program": "ROLS6011"}], "ROLS6020": [{"choice": "List products", "program": "ROLS6023"}, {"choice": "Search product", "program": "ROLS6022"}, {"choice": "Create product", "program": "ROLS6021"}]}, "roots": ["ROLS0001"], "batch": ["ROLS6100", "ROLS6200", "ROLS6300", "ROLS7999"], "shared": ["ROLS9001", "ROLS9002", "ROLS9003"], "copybooks": ["CPM-CUSTOMER", "CPM-ORDER", "CPM-PAR9001", "CPM-PRODUCT"], "drivers": [], "screens": [], "jobs": ["ROLA6200", "ROLA6300", "ROLJ6100"], "data": ["ORACLE-AS-IS-SCHEMA", "SCHEMA", "SQL/ROLS6200", "SQL/ROLS6300"], "unused": ["CPM-COMMON"], "other": []};
+
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function itemButton(program, choice) {
+  const info = DATA.programs[program] || {};
+  const choiceHtml = choice ? `<span class="choice">"${esc(choice)}"</span>` : '';
+  return `<button class="item" data-program="${esc(program)}">${choiceHtml}<span class="id">${esc(program)}</span><span class="title">${esc(info.title || '')}</span></button>`;
+}
+
+function renderBranch(program, choice) {
+  const kids = DATA.menus[program] || [];
+  let html = itemButton(program, choice);
+  if (kids.length) {
+    html += `<div class="children">${kids.map(k => renderBranch(k.program, k.choice)).join('')}</div>`;
+  }
+  return html;
+}
+
+function renderTree() {
+  let html = `<div class="section">Interactive</div>`;
+  html += DATA.roots.map(p => renderBranch(p)).join('');
+  if (DATA.batch.length) {
+    html += `<div class="section">Batch</div>` + DATA.batch.map(p => itemButton(p)).join('');
+  }
+  if (DATA.shared.length) {
+    html += `<div class="section">Shared</div>` + DATA.shared.map(p => itemButton(p)).join('');
+  }
+  if ((DATA.copybooks || []).length) {
+    html += `<div class="section">Copybooks</div>` + DATA.copybooks.map(p => itemButton(p)).join('');
+  }
+  if ((DATA.drivers || []).length) {
+    html += `<div class="section">Drivers</div>` + DATA.drivers.map(p => itemButton(p)).join('');
+  }
+  if ((DATA.screens || []).length) {
+    html += `<div class="section">Screens</div>` + DATA.screens.map(p => itemButton(p)).join('');
+  }
+  if ((DATA.jobs || []).length) {
+    html += `<div class="section">Jobs</div>` + DATA.jobs.map(p => itemButton(p)).join('');
+  }
+  if ((DATA.data || []).length) {
+    html += `<div class="section">Data</div>` + DATA.data.map(p => itemButton(p)).join('');
+  }
+  if ((DATA.unused || []).length) {
+    html += `<div class="section">Unused</div>` + DATA.unused.map(p => itemButton(p)).join('');
+  }
+  if ((DATA.other || []).length) {
+    html += `<div class="section">Other</div>` + DATA.other.map(p => itemButton(p)).join('');
+  }
+  document.getElementById('tree').innerHTML = html;
+}
+
+function show(program) {
+  document.querySelectorAll('.item').forEach(el => el.classList.toggle('active', el.dataset.program === program));
+  const info = DATA.programs[program];
+  if (!info) return;
+  const title = info.title ? ' — ' + esc(info.title) : '';
+  const files = [info.source_file, info.screen_file].filter(Boolean).join(' · ');
+  const brief = info.summary ? esc(info.summary) : '<span class="empty">No brief yet. Run cobol-rag briefs.</span>';
+  document.getElementById('detail').innerHTML = `
+    <h2>${esc(program)}${title}</h2>
+    <div class="meta">${esc(files)}</div>
+    <div id="brief">${brief}</div>
+  `;
+}
+
+renderTree();
+document.getElementById('tree').addEventListener('click', (event) => {
+  const button = event.target.closest('.item');
+  if (button) show(button.dataset.program);
+});
+</script>
+</body>
+</html>

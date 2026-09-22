@@ -1,0 +1,640 @@
+{
+  "version": 1,
+  "programs": {
+    "ROLS0001": {
+      "id": 0,
+      "name": "Main menu",
+      "role": "root"
+    },
+    "ROLS6001": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6005": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6002": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6003": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6004": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6010": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6013": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6012": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6011": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6020": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6023": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6022": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6021": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS9001": {
+      "id": 4,
+      "name": "Shared",
+      "role": "shared"
+    },
+    "ROLS9002": {
+      "id": 4,
+      "name": "Shared",
+      "role": "shared"
+    },
+    "ROLS9003": {
+      "id": 4,
+      "name": "Shared",
+      "role": "shared"
+    },
+    "CPM-CUSTOMER": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "CPM-ORDER": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "CPM-PAR9001": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "CPM-PRODUCT": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "ROLS6100": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "ROLS6200": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "ROLS6300": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "ROLS7999": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "ROLA6200": {
+      "id": 7,
+      "name": "Jobs",
+      "role": "job"
+    },
+    "ROLA6300": {
+      "id": 7,
+      "name": "Jobs",
+      "role": "job"
+    },
+    "ROLJ6100": {
+      "id": 7,
+      "name": "Jobs",
+      "role": "job"
+    },
+    "ORACLE-AS-IS-SCHEMA": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "SCHEMA": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "SQL/ROLS6200": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "SQL/ROLS6300": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "CPM-COMMON": {
+      "id": 9,
+      "name": "Unused",
+      "role": "unused"
+    },
+    "cobol/ROLS0001.COB": {
+      "id": 0,
+      "name": "Main menu",
+      "role": "root"
+    },
+    "ROLS0001.COB": {
+      "id": 0,
+      "name": "Main menu",
+      "role": "root"
+    },
+    "forms/ROLS0001.LAY": {
+      "id": 0,
+      "name": "Main menu",
+      "role": "root"
+    },
+    "ROLS0001.LAY": {
+      "id": 0,
+      "name": "Main menu",
+      "role": "root"
+    },
+    "cobol/ROLS6001.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6001.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "forms/ROLS6001.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6001.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "cobol/ROLS6002.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6002.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "forms/ROLS6002.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6002.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "cobol/ROLS6003.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6003.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "forms/ROLS6003.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6003.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "cobol/ROLS6004.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6004.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "forms/ROLS6004.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6004.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "cobol/ROLS6005.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6005.COB": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "forms/ROLS6005.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "ROLS6005.LAY": {
+      "id": 1,
+      "name": "Menu ROLS6001",
+      "role": "menu"
+    },
+    "cobol/ROLS6010.COB": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6010.COB": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "forms/ROLS6010.LAY": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6010.LAY": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "cobol/ROLS6011.COB": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6011.COB": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "forms/ROLS6011.LAY": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6011.LAY": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "cobol/ROLS6012.COB": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6012.COB": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "forms/ROLS6012.LAY": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6012.LAY": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "cobol/ROLS6013.COB": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6013.COB": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "forms/ROLS6013.LAY": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "ROLS6013.LAY": {
+      "id": 2,
+      "name": "Menu ROLS6010",
+      "role": "menu"
+    },
+    "cobol/ROLS6020.COB": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6020.COB": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "forms/ROLS6020.LAY": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6020.LAY": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "cobol/ROLS6021.COB": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6021.COB": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "forms/ROLS6021.LAY": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6021.LAY": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "cobol/ROLS6022.COB": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6022.COB": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "forms/ROLS6022.LAY": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6022.LAY": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "cobol/ROLS6023.COB": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6023.COB": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "forms/ROLS6023.LAY": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "ROLS6023.LAY": {
+      "id": 3,
+      "name": "Menu ROLS6020",
+      "role": "menu"
+    },
+    "cobol/ROLS6100.COB": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "ROLS6100.COB": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "cobol/ROLS6200.COB": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "ROLS6200.COB": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "cobol/ROLS6300.COB": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "ROLS6300.COB": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "cobol/ROLS7999.COB": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "ROLS7999.COB": {
+      "id": 6,
+      "name": "Batch",
+      "role": "batch"
+    },
+    "cobol/ROLS9001.COB": {
+      "id": 4,
+      "name": "Shared",
+      "role": "shared"
+    },
+    "ROLS9001.COB": {
+      "id": 4,
+      "name": "Shared",
+      "role": "shared"
+    },
+    "cobol/ROLS9002.COB": {
+      "id": 4,
+      "name": "Shared",
+      "role": "shared"
+    },
+    "ROLS9002.COB": {
+      "id": 4,
+      "name": "Shared",
+      "role": "shared"
+    },
+    "cobol/ROLS9003.COB": {
+      "id": 4,
+      "name": "Shared",
+      "role": "shared"
+    },
+    "ROLS9003.COB": {
+      "id": 4,
+      "name": "Shared",
+      "role": "shared"
+    },
+    "copylib/CPM-COMMON.TXT": {
+      "id": 9,
+      "name": "Unused",
+      "role": "unused"
+    },
+    "CPM-COMMON.TXT": {
+      "id": 9,
+      "name": "Unused",
+      "role": "unused"
+    },
+    "copylib/CPM-CUSTOMER.TXT": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "CPM-CUSTOMER.TXT": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "copylib/CPM-ORDER.TXT": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "CPM-ORDER.TXT": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "copylib/CPM-PAR9001.TXT": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "CPM-PAR9001.TXT": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "copylib/CPM-PRODUCT.TXT": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "CPM-PRODUCT.TXT": {
+      "id": 5,
+      "name": "Copybooks",
+      "role": "copybook"
+    },
+    "jobs/ROLA6200.JOB": {
+      "id": 7,
+      "name": "Jobs",
+      "role": "job"
+    },
+    "ROLA6200.JOB": {
+      "id": 7,
+      "name": "Jobs",
+      "role": "job"
+    },
+    "jobs/ROLA6300.JOB": {
+      "id": 7,
+      "name": "Jobs",
+      "role": "job"
+    },
+    "ROLA6300.JOB": {
+      "id": 7,
+      "name": "Jobs",
+      "role": "job"
+    },
+    "jobs/ROLJ6100.JOB": {
+      "id": 7,
+      "name": "Jobs",
+      "role": "job"
+    },
+    "ROLJ6100.JOB": {
+      "id": 7,
+      "name": "Jobs",
+      "role": "job"
+    },
+    "sql/ROLS6200.SQL": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "ROLS6200.SQL": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "sql/ROLS6300.SQL": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "ROLS6300.SQL": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "sql/oracle-as-is-schema.sql": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "ORACLE-AS-IS-SCHEMA.SQL": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "sql/schema.sql": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    },
+    "SCHEMA.SQL": {
+      "id": 8,
+      "name": "Data",
+      "role": "data"
+    }
+  }
+}
